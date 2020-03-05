@@ -2,7 +2,7 @@
   "name": "seafaring",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://superhackerboy.github.io/sweet-seafaring-dreams/",
+  "homepage": "https://dance2die.github.io/sweet-seafaring-dreams/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -16,8 +16,12 @@
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/styles/index.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/index.css --watch",
-    "start": "cross-env NODE_ENV=development concurrently \"npm run watch:css\" \"react-scripts start\"",
-    "build": "cross-env NODE_ENV=production concurrently \"npm run build:css\" \"react-scripts build\"",
+    "env:dev": "cross-env NODE_ENV=development",
+    "env:prod": "cross-env NODE_ENV=production",
+    "react-scripts:start": "sleep 5 && react-scripts start",
+    "react-scripts:build": "react-scripts build",
+    "start": "run-p env:dev watch:css react-scripts:start",
+    "build": "run-s env:prod build:css react-scripts:build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -41,9 +45,9 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "autoprefixer": "^9.7.4",
-    "concurrently": "^5.1.0",
     "cross-env": "^7.0.0",
     "cssnano": "^4.1.10",
+    "npm-run-all": "^4.1.5",
     "postcss-cli": "^7.1.0",
     "purgecss": "^2.1.0",
     "tailwindcss": "^1.2.0"
